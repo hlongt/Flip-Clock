@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="翻页时钟 · 纸感极简的在线翻页时钟。">
+<meta name="theme-color" content="#f6f2e8">
+<title>翻页时钟 · Flip Clock</title>
+<style>
+  /* 内嵌 Fredoka SemiBold 数字子集（仅 0-9 / A / P / M，约 2KB），单文件离线可用 */
+  @font-face{
+    font-family:"Fredoka Local";
+    font-style:normal;font-weight:600;font-display:block;
+    src:url(data:font/woff2;base64,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) format("woff2");
+  }
+
+  /* 默认色即"日间纸感"；Earth Light 打开后由脚本按太阳高度改写这些变量 */
+  :root{
+    --paper:#f6f2e8;
+    --ink:#241f19;
+    --ink-rgb:36,31,25;
+    --sh-rgb:36,31,25;
+    --ink-soft:#4c4437;
+    --muted:#8d8474;
+    --line:#ddd4c1;
+    --line-soft:#e9e1d0;
+    --accent:#c2552f;
+    --accent-rgb:194,85,47;
+    --bg-0:#fcf9f3;
+    --bg-1:#f5f0e5;
+    --bg-2:#eee7d9;
+    --card-edge:#d8cfbb;
+    --sheet:#fbf8f1;
+    --field:#ffffff;
+    --hover:rgba(255,255,255,.6);
+    --on-ink:#f9f6ef;
+    --scrim:rgba(36,31,25,.1);
+    --grain:.32;
+    --lx:50%;
+    --ly:42%;
+    --card-w:200px;
+    --card-h:224px;
+    --gap:18px;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    overflow:hidden;
+    color:var(--ink);
+    background:var(--paper);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;
+    background:radial-gradient(125% 85% at var(--lx) var(--ly),var(--bg-0) 0%,var(--bg-1) 58%,var(--bg-2) 100%);
+  }
+  .grain{
+    position:fixed;inset:0;z-index:2;pointer-events:none;opacity:var(--grain);
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+  }
+  /* 夜色里 multiply 会把噪点埋进黑底，改用柔光让纸纹浮起来 */
+  body.dusk .grain{mix-blend-mode:soft-light}
+
+  /* ---------- 舞台 ---------- */
+  .stage{
+    position:fixed;inset:0;z-index:5;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:26px;padding:80px 20px;
+  }
+  .clock{display:flex;align-items:stretch;gap:var(--gap)}
+
+  .card{
+    position:relative;
+    width:var(--card-w);height:var(--card-h);
+    border:1px solid var(--card-edge);border-radius:10px;
+    box-shadow:0 1px 1px rgba(var(--sh-rgb),.03),0 22px 36px -26px rgba(var(--sh-rgb),.55);
+    transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+  }
+  .card canvas{display:block;width:100%;height:100%;border-radius:9px}
+  /* 12 小时制时角标 */
+  .mer{
+    position:absolute;right:12px;bottom:9px;
+    font-family:"Fredoka Local","Varela Round","Segoe UI Rounded",sans-serif;
+    font-size:9px;font-weight:600;letter-spacing:.2em;color:var(--muted);
+    pointer-events:none;user-select:none;
+  }
+
+  /* ---------- 右上角图标控件 ---------- */
+  .dock{
+    position:fixed;top:0;right:0;z-index:45;
+    display:flex;align-items:center;justify-content:flex-end;gap:9px;
+    padding:22px 26px;
+    transition:opacity .45s var(--ease),transform .45s var(--ease);
+  }
+  .iconbtn{
+    width:38px;height:38px;flex:0 0 auto;
+    display:grid;place-items:center;
+    border:1px solid var(--line);border-radius:50%;
+    background:transparent;color:var(--ink-soft);cursor:pointer;
+    transition:color .22s var(--ease),border-color .22s var(--ease),
+               background .22s var(--ease),transform .18s var(--ease),
+               box-shadow .22s var(--ease);
+  }
+  .iconbtn svg{width:15px;height:15px;display:block}
+  .iconbtn .ico-compress{display:none}
+  body.is-full .iconbtn .ico-expand{display:none}
+  body.is-full .iconbtn .ico-compress{display:block}
+  .iconbtn:hover{
+    color:var(--ink);border-color:var(--ink-soft);
+    background:var(--hover);
+    box-shadow:0 8px 18px -14px rgba(var(--sh-rgb),.95);
+  }
+  .iconbtn:active{transform:scale(.93)}
+  .iconbtn:focus-visible{outline:2px solid rgba(var(--accent-rgb),.42);outline-offset:3px}
+  /* 设置面板打开时，设置按钮保持激活态 */
+  body.sheet-open #openSheet{
+    background:var(--ink);border-color:var(--ink);color:var(--on-ink);
+  }
+
+  /* ---------- 设置卡片 ---------- */
+  .scrim{
+    position:fixed;inset:0;z-index:30;background:var(--scrim);
+    opacity:0;pointer-events:none;transition:opacity .3s var(--ease);
+  }
+  .scrim.on{opacity:1;pointer-events:auto}
+
+  .sheet{
+    position:fixed;top:72px;right:26px;z-index:40;
+    width:min(424px, calc(100vw - 32px));
+    max-height:min(70vh,520px);overflow:auto;
+    padding:17px 20px 13px;
+    background:var(--sheet);
+    border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 2px 4px -3px rgba(var(--sh-rgb),.1),0 32px 60px -34px rgba(var(--sh-rgb),.55);
+    transform-origin:100% 0;
+    transform:translateY(-10px) scale(.97);
+    opacity:0;pointer-events:none;
+    transition:transform .34s var(--ease),opacity .24s var(--ease);
+  }
+  .sheet.open{transform:none;opacity:1;pointer-events:auto}
+  .sheet-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 5px}
+  .sheet-head b{font-size:11px;letter-spacing:.18em;font-weight:600;color:var(--muted)}
+  .close{
+    width:24px;height:24px;margin-right:-5px;
+    display:grid;place-items:center;
+    border:0;background:none;border-radius:50%;color:var(--muted);cursor:pointer;
+    transition:background .2s var(--ease),color .2s var(--ease);
+  }
+  .close:hover{background:rgba(var(--ink-rgb),.07);color:var(--ink)}
+  .close svg{width:11px;height:11px;display:block}
+  .sheet-body{max-width:100%}
+
+  .row{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    padding:13px 0;border-bottom:1px solid var(--line-soft);
+  }
+  .row[hidden]{display:none}
+  .row:last-child{border-bottom:0}
+  .row .label{font-size:12.5px;letter-spacing:.04em;color:var(--ink-soft)}
+
+  .seg{display:flex;gap:4px;flex-shrink:0}
+  .seg button{
+    border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+    font:inherit;font-size:11.5px;letter-spacing:.04em;
+    min-width:60px;padding:6px 11px;border-radius:2px;cursor:pointer;transition:all .2s;
+  }
+  .seg button:hover{border-color:var(--ink-soft)}
+  .seg button.on{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+
+  /* 滑杆 */
+  .slider{
+    -webkit-appearance:none;appearance:none;
+    width:auto;flex:1 1 auto;min-width:100px;height:1px;background:var(--line);
+    outline:none;cursor:pointer;
+  }
+  .slider::-webkit-slider-thumb{
+    -webkit-appearance:none;width:11px;height:11px;border-radius:50%;
+    background:var(--ink);border:0;cursor:pointer;
+    transition:transform .18s var(--ease);
+  }
+  .slider:hover::-webkit-slider-thumb{transform:scale(1.25)}
+  .slider::-moz-range-thumb{width:11px;height:11px;border:0;border-radius:50%;background:var(--ink)}
+
+  .num{
+    display:flex;align-items:center;justify-content:flex-end;gap:12px;
+    flex:1 1 auto;min-width:0;
+    font-size:11.5px;color:var(--muted);
+  }
+  /* 可直接键入的数值框 */
+  .field{
+    display:flex;align-items:baseline;gap:2px;flex:0 0 auto;
+    padding:5px 7px 5px 9px;
+    border:1px solid var(--line);border-radius:2px;background:var(--field);
+    transition:border-color .2s var(--ease);
+  }
+  .field:focus-within{border-color:var(--ink-soft)}
+  .field input{
+    width:30px;padding:0;border:0;background:none;text-align:right;
+    font:inherit;font-size:12px;color:var(--ink);
+    -moz-appearance:textfield;
+  }
+  .field input:focus{outline:0}
+  .field input::-webkit-outer-spin-button,
+  .field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .field i{font-style:normal;font-size:11px;color:var(--muted)}
+
+  /* ---------- Earth Light ---------- */
+  .earth-row{padding:13px 0 12px;border-bottom:1px solid var(--line-soft)}
+  .earth-row .label{letter-spacing:.02em}
+  .switch{
+    position:relative;flex:0 0 auto;width:42px;height:24px;padding:0;
+    border:1px solid var(--line);border-radius:999px;background:transparent;
+    cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease);
+  }
+  .switch i{
+    position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;
+    background:var(--muted);
+    transition:transform .32s var(--ease),background .3s var(--ease);
+  }
+  .switch:hover{border-color:var(--ink-soft)}
+  .switch.on{background:var(--ink);border-color:var(--ink)}
+  .switch.on i{transform:translateX(18px);background:var(--on-ink)}
+  .switch:focus-visible{outline:2px solid rgba(var(--accent-rgb),.42);outline-offset:3px}
+
+  .earth{padding:12px 0 14px;border-bottom:1px solid var(--line-soft)}
+  .earth[hidden]{display:none}
+  /* 一整天的天光色带，游标指着此刻 */
+  .sky{
+    position:relative;height:11px;margin:0 0 9px;
+    border-radius:999px;border:1px solid var(--line);
+    background:var(--line-soft);
+  }
+  .sky-now{
+    position:absolute;top:-4px;left:0;width:2px;height:17px;border-radius:1px;
+    background:var(--ink);box-shadow:0 0 0 1.5px var(--sheet);
+    transition:left .6s var(--ease);
+  }
+  .sky-meta{
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    font-size:10.5px;letter-spacing:.06em;color:var(--muted);
+  }
+  .sky-stage{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:11.5px;letter-spacing:.02em;color:var(--ink-soft);
+  }
+  .sky-stage::before{
+    content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 2.5px rgba(var(--accent-rgb),.16);
+  }
+
+  /* 观察点：日出日落按这里算 */
+  .loc-head{
+    margin:13px 0 0;font-size:10.5px;letter-spacing:.06em;color:var(--muted);
+  }
+  .loc-btn{
+    display:flex;align-items:baseline;gap:8px;width:100%;margin-top:6px;
+    padding:6px 9px 6px 11px;border:1px solid var(--line);border-radius:4px;
+    background:var(--field);color:var(--ink-soft);
+    font:inherit;font-size:11.5px;letter-spacing:.02em;
+    text-align:left;cursor:pointer;
+    transition:border-color .2s var(--ease),background .2s var(--ease);
+  }
+  .loc-btn:hover{border-color:var(--ink-soft)}
+  .loc-btn .loc-geo{margin-left:auto;font-size:10px;color:var(--muted);letter-spacing:.02em}
+  .loc-btn svg{
+    width:10px;height:10px;flex:0 0 auto;align-self:center;color:var(--muted);
+    transition:transform .26s var(--ease);
+  }
+  .loc-btn.open svg{transform:rotate(180deg)}
+  .loc-list{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:3px;
+    margin-top:7px;max-height:146px;overflow:auto;overscroll-behavior:contain;
+  }
+  .loc-list[hidden]{display:none}
+  /* 末行只剩一个时让它居中，不要孤零零挂在左边 */
+  .loc-list button:last-child:nth-child(3n+1){grid-column:2}
+  .loc-list button{
+    border:1px solid transparent;border-radius:3px;background:transparent;
+    color:var(--ink-soft);font:inherit;font-size:11px;letter-spacing:.02em;
+    padding:6px 2px;cursor:pointer;
+    transition:background .18s var(--ease),color .18s var(--ease);
+  }
+  .loc-list button:hover{background:rgba(var(--ink-rgb),.07)}
+  .loc-list button.on{background:var(--ink);color:var(--on-ink)}
+  .loc-list::-webkit-scrollbar{width:4px}
+  .loc-list::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+
+  .keys{
+    margin-top:14px;font-size:10.5px;letter-spacing:.1em;color:var(--muted);
+    display:flex;gap:16px;flex-wrap:wrap;
+  }
+  .keys kbd{
+    font:inherit;font-size:10px;padding:2px 6px;border:1px solid var(--line);
+    border-radius:2px;color:var(--ink-soft);margin-right:4px;
+  }
+  .keys-credit{
+    margin:11px 0 0;font-size:9.5px;letter-spacing:.03em;color:var(--muted);
+  }
+
+  /* 全屏/沉浸：3 秒无操作后收起控件 */
+  body.idle .dock{opacity:0;transform:translateY(-8px);pointer-events:none}
+  body.idle{cursor:none}
+
+  @media (max-width:700px){
+    .dock{top:0;padding:14px 16px;gap:8px}
+    .iconbtn{width:34px;height:34px}
+    .iconbtn svg{width:14px;height:14px}
+    .stage{padding:56px 14px 40px;gap:18px}
+    .mer{right:9px;bottom:7px;font-size:8px}
+    .sheet{top:58px;right:14px;left:14px;width:auto;max-height:min(74vh,540px);padding:14px 16px 10px}
+    .row{padding:12px 0;gap:10px}
+    .slider{min-width:80px}
+    .num{gap:10px}
+    .field{padding:4px 6px 4px 8px}
+    .field input{width:26px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="stage" id="stage">
+  <div class="clock" id="clock">
+    <div class="card" data-unit="h">
+      <canvas></canvas>
+      <span class="mer" data-mer></span>
+    </div>
+    <div class="card" data-unit="m">
+      <canvas></canvas>
+    </div>
+    <div class="card" data-unit="s">
+      <canvas></canvas>
+    </div>
+  </div>
+</main>
+
+<div class="dock">
+  <button class="iconbtn" id="full" type="button" aria-label="全屏" title="全屏（F）">
+    <svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 4.5H4.5V9M15 4.5h4.5V9M9 19.5H4.5V15M15 19.5h4.5V15"/>
+    </svg>
+    <svg class="ico-compress" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4.5 9H9V4.5M19.5 9H15V4.5M4.5 15H9v4.5M19.5 15H15v4.5"/>
+    </svg>
+  </button>
+  <button class="iconbtn" id="openSheet" type="button" aria-label="设置" title="设置（S）">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3.5 7.5h8M18.5 7.5h2M3.5 16.5h2M12.5 16.5h8"/>
+      <circle cx="15" cy="7.5" r="2.3"/>
+      <circle cx="9" cy="16.5" r="2.3"/>
+    </svg>
+  </button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="sheet" id="sheet" aria-hidden="true" aria-label="设置">
+  <div class="sheet-body">
+    <div class="sheet-head">
+      <b>设置</b>
+      <button class="close" id="closeSheet" type="button" aria-label="收起设置" title="收起（ESC）">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M2.2 2.2l7.6 7.6M9.8 2.2l-7.6 7.6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="row earth-row">
+      <div class="label">Earth Light</div>
+      <button class="switch" id="earthSwitch" type="button" role="switch" aria-checked="false" aria-label="Earth Light">
+        <i></i>
+      </button>
+    </div>
+
+    <div class="earth" id="earthPanel" hidden>
+      <div class="sky" id="sky" aria-hidden="true"><i class="sky-now" id="skyNow"></i></div>
+      <div class="sky-meta">
+        <span class="sky-stage" id="skyStage">—</span>
+        <span id="skySun"></span>
+      </div>
+      <p class="loc-head">Hey，你在哪里附近</p>
+      <button class="loc-btn" id="locBtn" type="button" aria-expanded="false">
+        <span id="locName">—</span>
+        <span class="loc-geo" id="locGeo"></span>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 4.6L6 7.6l3-3"/>
+        </svg>
+      </button>
+      <div class="loc-list" id="locList" hidden></div>
+    </div>
+
+    <div class="row">
+      <div class="label">小时制</div>
+      <div class="seg" data-seg="hour12">
+        <button data-val="0">24 小时</button>
+        <button data-val="1">12 小时</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">缩放</div>
+      <div class="num">
+        <input type="range" class="slider" id="scale" min="60" max="150" step="1" aria-label="缩放">
+        <label class="field">
+          <input type="number" id="scaleNum" min="60" max="150" step="1" inputmode="numeric" aria-label="缩放百分比">
+          <i>%</i>
+        </label>
+      </div>
+    </div>
+
+    <div class="keys">
+      <span><kbd>F</kbd>全屏</span>
+      <span><kbd>S</kbd>设置</span>
+      <span><kbd>双击</kbd>全屏</span>
+      <span><kbd>ESC</kbd>收起</span>
+    </div>
+
+    <div class="keys-credit">© 2026 Longtao Huang. All rights reserved.</div>
+  </div>
+</aside>
+
+<script>
+(function () {
+  'use strict';
+
+  var FONT = '"Fredoka Local", "Varela Round", "Segoe UI Rounded", "Quicksand", "PingFang SC", sans-serif';
+  var DUR = 520;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============ Earth Light：天光调色引擎 ============
+     把页面当成一张摊在户外的纸：纸的底色、墨色、边缘阴影，全部由此刻
+     太阳的高度角决定。一天被切成若干"光况关键帧"，相邻关键帧之间在
+     OKLab 空间插值——所以蓝调时刻走向日落时会自然经过紫罗兰，而不是
+     混出一片脏灰。
+  ================================================== */
+
+  var RAD = Math.PI / 180;
+  /* 观察点：默认深圳，用户可以改成附近的城市；只影响日出日落与天光相位 */
+  var SITE = { name: '深圳', lat: 22.54, lon: 114.06, tz: 'Asia/Shanghai' };
+
+  /* --- sRGB ⇄ OKLab --- */
+  function hexRgb(hex) {
+    hex = hex.replace('#', '');
+    return [parseInt(hex.substr(0, 2), 16), parseInt(hex.substr(2, 2), 16), parseInt(hex.substr(4, 2), 16)];
+  }
+  function parseColor(c) {
+    if (c.charAt(0) === '#') {
+      var h = hexRgb(c);
+      return { r: h[0], g: h[1], b: h[2], a: 1 };
+    }
+    var m = /rgba?\(([^)]+)\)/.exec(c);
+    if (!m) return { r: 0, g: 0, b: 0, a: 1 };
+    var p = m[1].split(',').map(parseFloat);
+    return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 };
+  }
+  function toLin(v) { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+  function toSrgb(v) {
+    v = v <= 0.0031308 ? v * 12.92 : 1.055 * Math.pow(v, 1 / 2.4) - 0.055;
+    return Math.max(0, Math.min(255, Math.round(v * 255)));
+  }
+  function toOklab(c) {
+    var r = toLin(c.r), g = toLin(c.g), b = toLin(c.b);
+    var l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+    var m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+    var s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+    return [
+      0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+      1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+      0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s
+    ];
+  }
+  function fromOklab(lab, alpha) {
+    var L = lab[0], A = lab[1], B = lab[2];
+    var l = Math.pow(L + 0.3963377774 * A + 0.2158037573 * B, 3);
+    var m = Math.pow(L - 0.1055613458 * A - 0.0638541728 * B, 3);
+    var s = Math.pow(L - 0.0894841775 * A - 1.2914855480 * B, 3);
+    return {
+      r: toSrgb(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
+      g: toSrgb(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
+      b: toSrgb(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s),
+      a: alpha
+    };
+  }
+  function mixColor(a, b, t) {
+    if (t <= 0) return a;
+    if (t >= 1) return b;
+    var la = toOklab(parseColor(a)), lb = toOklab(parseColor(b));
+    var lab = [
+      la[0] + (lb[0] - la[0]) * t,
+      la[1] + (lb[1] - la[1]) * t,
+      la[2] + (lb[2] - la[2]) * t
+    ];
+    var aa = parseColor(a), ab = parseColor(b);
+    var c = fromOklab(lab, aa.a + (ab.a - aa.a) * t);
+    return 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + (Math.round(c.a * 1000) / 1000) + ')';
+  }
+  function triple(c) { var p = parseColor(c); return p.r + ',' + p.g + ',' + p.b; }
+  function luma(c) { var p = parseColor(c); return (0.2126 * p.r + 0.7152 * p.g + 0.0722 * p.b) / 255; }
+
+  /* --- 光况关键帧：e 为太阳高度角（度） ---
+     每一帧的卡片都是"同一束天光下的纸"：色相贴着背景光晕，彩度约为背景的
+     一半，明度只比背景高一档。这样纸张与天空共用一套光，才不会出现
+     "彩色天 + 一块发光白板"的割裂感。 --- */
+  var DAY_FRAME = {
+    e: 14,
+    bg: ['#fcf9f3', '#f5f0e5', '#eee7d9'],
+    card: ['#fdfbf6', '#f8f2e4', '#efe7d4', '#e9dfc9'],
+    ink: '#241f19', soft: '#4c4437', muted: '#8d8474',
+    line: '#ddd4c1', line2: '#e9e1d0', edge: '#d8cfbb', accent: '#c2552f',
+    sheet: '#fbf8f1', field: '#ffffff',
+    hover: 'rgba(255,255,255,.6)', onInk: '#f9f6ef',
+    shadow: '#241f19', scrim: 'rgba(36,31,25,.1)',
+    grain: 0.32, seamHi: 0.85, tint: 0
+  };
+
+  var EARTH = [
+    /* 深夜：只剩星光与月色，纸面被夜空压成靛蓝 */
+    { e: -90,
+      bg: ['#0b1019', '#080c14', '#05080e'],
+      card: ['#171d2a', '#151b26', '#131822', '#11151e'],
+      ink: '#dfe8fb', soft: '#a9b7d2', muted: '#7a89a1',
+      line: '#243049', line2: '#1d2839', edge: '#2d3c56', accent: '#8ea9dd',
+      sheet: '#141b28', field: '#0d131e',
+      hover: 'rgba(150,178,225,.10)', onInk: '#0a0f18',
+      shadow: '#03060b', scrim: 'rgba(3,5,10,.55)',
+      grain: 0.28, seamHi: 0.06, tint: 0.55 },
+
+    /* 天文暮光：天边浮起第一层微光 */
+    { e: -18,
+      bg: ['#0e1626', '#0b111d', '#070b13'],
+      card: ['#1a2335', '#182131', '#161d2c', '#141a27'],
+      ink: '#e3ebfd', soft: '#adbcd8', muted: '#7f8ea8',
+      line: '#29374f', line2: '#212e42', edge: '#31405a', accent: '#92abdd',
+      sheet: '#171f2f', field: '#101724',
+      hover: 'rgba(150,178,225,.10)', onInk: '#0a0f18',
+      shadow: '#04070d', scrim: 'rgba(4,7,13,.52)',
+      grain: 0.28, seamHi: 0.06, tint: 0.55 },
+
+    /* 航海暮光：靛蓝压顶，纸开始透出一点冷蓝 */
+    { e: -12,
+      bg: ['#152036', '#101927', '#0a101c'],
+      card: ['#222e44', '#202b3f', '#1d2739', '#1b2334'],
+      ink: '#e8eefe', soft: '#b4c3dd', muted: '#8897b1',
+      line: '#2f3f59', line2: '#28364b', edge: '#384a68', accent: '#9db4e0',
+      sheet: '#1e283b', field: '#161f2e',
+      hover: 'rgba(155,185,230,.12)', onInk: '#0a101c',
+      shadow: '#070b16', scrim: 'rgba(7,11,22,.5)',
+      grain: 0.28, seamHi: 0.07, tint: 0.6 },
+
+    /* 蓝调时刻：天空最饱和的钴蓝，天光已落到地平线 */
+    { e: -6,
+      bg: ['#2b4470', '#1e3156', '#16233d'],
+      card: ['#415476', '#3f5070', '#3c4c69', '#394762'],
+      ink: '#f3f5ff', soft: '#d2d9ee', muted: '#a9b8d4',
+      line: '#55688c', line2: '#4a5c7e', edge: '#62779f', accent: '#cda6cd',
+      sheet: '#3b4d6d', field: '#334565',
+      hover: 'rgba(180,200,240,.14)', onInk: '#16233d',
+      shadow: '#101728', scrim: 'rgba(12,18,34,.45)',
+      grain: 0.3, seamHi: 0.1, tint: 0.7 },
+
+    /* 日轮交界：橙与紫同时挂在天上，纸被浸成玫瑰金——
+       卡片的色相沿天空的梯度走（上橙下紫），而不是整块橘色 */
+    { e: -1.5,
+      bg: ['#c07d68', '#8d5f70', '#4f4463'],
+      card: ['#c4a18b', '#c19a8f', '#ba9496', '#b08f9b'],
+      ink: '#3a2118', soft: '#5b362a', muted: '#6d4a3a',
+      line: '#b99383', line2: '#c5a396', edge: '#ae8472', accent: '#a2402a',
+      sheet: '#c39c93', field: '#d9b6a9',
+      hover: 'rgba(255,240,230,.35)', onInk: '#fdeee2',
+      shadow: '#3c1b1f', scrim: 'rgba(48,25,32,.35)',
+      grain: 0.31, seamHi: 0.5, tint: 0.9 },
+
+    /* 日出 / 日落：低角度橙金斜射光 */
+    { e: 2,
+      bg: ['#f7dab2', '#f0c495', '#dda878'],
+      card: ['#f9ebd4', '#fae5cc', '#f9dfc5', '#f8d8be'],
+      ink: '#452b1b', soft: '#65432e', muted: '#8d6a48',
+      line: '#e3c49b', line2: '#ecd4b2', edge: '#debf98', accent: '#b7522c',
+      sheet: '#f9e9d4', field: '#fffaf1',
+      hover: 'rgba(255,255,255,.5)', onInk: '#fdf1e0',
+      shadow: '#6b4326', scrim: 'rgba(75,48,28,.14)',
+      grain: 0.32, seamHi: 0.7, tint: 0.9 },
+
+    /* 黄金时刻：暖金漫射，纸还是纸，只是被镀了一层 */
+    { e: 6,
+      bg: ['#fcf0d6', '#f9e9cb', '#f2ddba'],
+      card: ['#fdf7ea', '#fcf3e2', '#faeeda', '#f9e9d1'],
+      ink: '#372718', soft: '#57402c', muted: '#8b7350',
+      line: '#e2cda8', line2: '#ebdabd', edge: '#ddc6a0', accent: '#b9542c',
+      sheet: '#fcf4e4', field: '#fffdf7',
+      hover: 'rgba(255,255,255,.55)', onInk: '#fbf2e0',
+      shadow: '#5c4226', scrim: 'rgba(70,48,26,.12)',
+      grain: 0.32, seamHi: 0.8, tint: 0.85 },
+
+    /* 日间：与关闭 Earth Light 时的默认纸感逐色相同，只多一层可忽略的天光 */
+    { e: 14,
+      bg: ['#fcf9f3', '#f5f0e5', '#eee7d9'],
+      card: ['#fdfbf6', '#f8f2e4', '#efe7d4', '#e9dfc9'],
+      ink: '#241f19', soft: '#4c4437', muted: '#8d8474',
+      line: '#ddd4c1', line2: '#e9e1d0', edge: '#d8cfbb', accent: '#c2552f',
+      sheet: '#fbf8f1', field: '#ffffff',
+      hover: 'rgba(255,255,255,.6)', onInk: '#f9f6ef',
+      shadow: '#241f19', scrim: 'rgba(36,31,25,.1)',
+      grain: 0.32, seamHi: 0.85, tint: 0.7 },
+
+    /* 正午：光最白最净，影子最短，纸面几乎无色偏 */
+    { e: 32,
+      bg: ['#fdfcf9', '#faf7f0', '#f4f0e6'],
+      card: ['#fffffe', '#fdfcf7', '#f6f2e8', '#efeade'],
+      ink: '#1f1c17', soft: '#453d32', muted: '#8a8171',
+      line: '#d9d1be', line2: '#e6dfcf', edge: '#d4cbb6', accent: '#c05a32',
+      sheet: '#fdfbf6', field: '#ffffff',
+      hover: 'rgba(255,255,255,.65)', onInk: '#fbf8f2',
+      shadow: '#241f19', scrim: 'rgba(36,31,25,.09)',
+      grain: 0.3, seamHi: 0.88, tint: 0.55 }
+  ];
+
+  var COLOR_KEYS = ['bg', 'card', 'ink', 'soft', 'muted', 'line', 'line2', 'edge',
+    'accent', 'sheet', 'field', 'hover', 'onInk', 'shadow', 'scrim'];
+
+  function finalize(p) {
+    p.inkRgb = triple(p.ink);
+    p.shRgb = triple(p.shadow);
+    p.accRgb = triple(p.accent);
+    p.bgRgb = triple(p.bg[0]);
+    return p;
+  }
+  function buildPal(f) {
+    var p = { grain: f.grain, seamHi: f.seamHi, tint: f.tint || 0 };
+    for (var i = 0; i < COLOR_KEYS.length; i++) {
+      var k = COLOR_KEYS[i];
+      p[k] = Array.isArray(f[k]) ? f[k].slice() : f[k];
+    }
+    return finalize(p);
+  }
+  function mixPal(a, b, t) {
+    var p = {
+      grain: a.grain + (b.grain - a.grain) * t,
+      seamHi: a.seamHi + (b.seamHi - a.seamHi) * t,
+      tint: a.tint + (b.tint - a.tint) * t
+    };
+    for (var i = 0; i < COLOR_KEYS.length; i++) {
+      var k = COLOR_KEYS[i];
+      if (Array.isArray(a[k])) {
+        p[k] = a[k].map(function (v, j) { return mixColor(v, b[k][j], t); });
+      } else {
+        p[k] = mixColor(a[k], b[k], t);
+      }
+    }
+    return finalize(p);
+  }
+  function palAt(alt) {
+    var n = EARTH.length;
+    if (alt <= EARTH[0].e) return buildPal(EARTH[0]);
+    if (alt >= EARTH[n - 1].e) return buildPal(EARTH[n - 1]);
+    for (var i = 0; i < n - 1; i++) {
+      var a = EARTH[i], b = EARTH[i + 1];
+      if (alt >= a.e && alt <= b.e) {
+        return buildPal(mixPal(buildPal(a), buildPal(b), (alt - a.e) / (b.e - a.e)));
+      }
+    }
+    return buildPal(EARTH[n - 1]);
+  }
+
+  var PAL_DAY = buildPal(DAY_FRAME);
+  var P = PAL_DAY;   // Canvas 绘制用的当前调色板
+
+  /* --- 太阳位置 --- */
+  function dayOfYear(d) {
+    var y = d.getFullYear();
+    return Math.floor((Date.UTC(y, d.getMonth(), d.getDate()) - Date.UTC(y, 0, 1)) / 86400000) + 1;
+  }
+  function declOf(d) {
+    return 23.44 * RAD * Math.sin(2 * Math.PI * (dayOfYear(d) - 81) / 365.24);
+  }
+  // 均时差：真太阳时与平太阳时的差（分钟），忽略它日出日落会差正负一刻钟
+  function eqTime(d) {
+    var B = 2 * Math.PI * (dayOfYear(d) - 81) / 364;
+    return 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
+  }
+  function sunPos(d) {
+    var decl = declOf(d);
+    var utcMin = d.getUTCHours() * 60 + d.getUTCMinutes() + d.getUTCSeconds() / 60;
+    var solarH = (utcMin + SITE.lon * 4 + eqTime(d)) / 60; // 当地真太阳时
+    var H = (solarH - 12) * 15 * RAD;                      // 时角
+    var lat = SITE.lat * RAD;
+    var sinAlt = Math.sin(lat) * Math.sin(decl) + Math.cos(lat) * Math.cos(decl) * Math.cos(H);
+    sinAlt = Math.max(-1, Math.min(1, sinAlt));
+    var alt = Math.asin(sinAlt);
+    var cosAz = (Math.sin(decl) - sinAlt * Math.sin(lat)) / ((Math.cos(alt) * Math.cos(lat)) || 1e-6);
+    var az = Math.acos(Math.max(-1, Math.min(1, cosAz))) / RAD;
+    if (Math.sin(H) > 0) az = 360 - az;                // 下午偏西
+    return { alt: alt / RAD, az: az, solar: solarH };
+  }
+  // 返回的是该城市钟表上的时间（真太阳时已按经度与时区差换算回去）
+  function sunTimes(d) {
+    var decl = declOf(d), lat = SITE.lat * RAD;
+    var cosH = (Math.sin(-0.833 * RAD) - Math.sin(lat) * Math.sin(decl)) / (Math.cos(lat) * Math.cos(decl));
+    if (cosH > 1 || cosH < -1) return null;
+    var H = Math.acos(cosH) / RAD;
+    var tzm = tzOffset(SITE.tz, d);
+    if (tzm == null) tzm = Math.round(SITE.lon / 15) * 60;
+    var shift = (tzm - SITE.lon * 4 - eqTime(d)) / 60;
+    return { rise: 12 - H / 15 + shift, set: 12 + H / 15 + shift };
+  }
+  function hhmm(h) {
+    var t = Math.round(h * 60) % 1440;
+    if (t < 0) t += 1440;
+    return (t < 600 ? '0' : '') + Math.floor(t / 60) + ':' + (t % 60 < 10 ? '0' : '') + (t % 60);
+  }
+  function stageOf(alt, rising) {
+    if (alt < -18) return ['深夜', 'Deep Night'];
+    if (alt < -12) return ['天文暮光', 'Astronomical Twilight'];
+    if (alt < -6) return ['航海暮光', 'Nautical Twilight'];
+    if (alt < -1.5) return ['蓝调时刻', 'Blue Hour'];
+    if (alt < 2) return ['日轮交界', 'Magic Hour'];
+    if (alt < 6) return rising ? ['日出', 'Sunrise'] : ['日落', 'Sunset'];
+    if (alt < 14) return rising ? ['晨光时刻', 'Morning Golden Hour'] : ['暮光时刻', 'Evening Golden Hour'];
+    if (alt < 32) return rising ? ['上午', 'Morning'] : ['午后', 'Afternoon'];
+    return ['正午', 'High Noon'];
+  }
+
+  /* --- 把调色板写到 CSS 变量上 --- */
+  var VARS = ['--paper', '--bg-0', '--bg-1', '--bg-2', '--ink', '--ink-rgb', '--sh-rgb',
+    '--ink-soft', '--muted', '--line', '--line-soft', '--card-edge', '--accent', '--accent-rgb',
+    '--sheet', '--field', '--hover', '--on-ink', '--scrim', '--grain', '--lx', '--ly'];
+
+  function applyPal(p) {
+    var r = document.documentElement.style;
+    r.setProperty('--paper', p.bg[1]);
+    r.setProperty('--bg-0', p.bg[0]);
+    r.setProperty('--bg-1', p.bg[1]);
+    r.setProperty('--bg-2', p.bg[2]);
+    r.setProperty('--ink', p.ink);
+    r.setProperty('--ink-rgb', p.inkRgb);
+    r.setProperty('--sh-rgb', p.shRgb);
+    r.setProperty('--ink-soft', p.soft);
+    r.setProperty('--muted', p.muted);
+    r.setProperty('--line', p.line);
+    r.setProperty('--line-soft', p.line2);
+    r.setProperty('--card-edge', p.edge);
+    r.setProperty('--accent', p.accent);
+    r.setProperty('--accent-rgb', p.accRgb);
+    r.setProperty('--sheet', p.sheet);
+    r.setProperty('--field', p.field);
+    r.setProperty('--hover', p.hover);
+    r.setProperty('--on-ink', p.onInk);
+    r.setProperty('--scrim', p.scrim);
+    r.setProperty('--grain', p.grain.toFixed(2));
+    document.body.classList.toggle('dusk', luma(p.bg[1]) < 0.42);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', p.bg[1]);
+  }
+
+  function redrawAll() {
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].draw(cards[i].anim ? cards[i].anim.last : 1);
+    }
+  }
+
+  var palToken = 0;
+  function setPalette(target, dur) {
+    var my = ++palToken;
+    if (!dur || reduceMotion) {
+      P = target;
+      applyPal(P);
+      redrawAll();
+      return;
+    }
+    var from = P, t0 = performance.now(), last = -1;
+    function step(now) {
+      if (my !== palToken) return;               // 有更新的过渡抢占了
+      var t = Math.min(1, (now - t0) / dur);
+      if (now - last < 24 && t < 1) { requestAnimationFrame(step); return; }
+      last = now;
+      var k = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      P = mixPal(from, target, k);
+      applyPal(P);
+      redrawAll();
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        P = target;
+        applyPal(P);
+        redrawAll();
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  function clearVars() {
+    var r = document.documentElement.style;
+    for (var i = 0; i < VARS.length; i++) r.removeProperty(VARS[i]);
+    document.body.classList.remove('dusk');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', '#f6f2e8');
+    P = PAL_DAY;
+    redrawAll();
+  }
+
+  /* --- 一整天色带 + 此刻落点 --- */
+  function skyGradient(now) {
+    var base = new Date(now.getTime());
+    base.setHours(0, 0, 0, 0);
+    var stops = [], n = 48;
+    for (var i = 0; i <= n; i++) {
+      var d = new Date(base.getTime() + i / n * 86400000);
+      stops.push(palAt(sunPos(d).alt).bg[0] + ' ' + (i / n * 100).toFixed(2) + '%');
+    }
+    return 'linear-gradient(90deg,' + stops.join(',') + ')';
+  }
+
+  var earthTimer = null, skyCache = null;
+
+  function renderEarth(dur) {
+    if (prefs.earth != 1) return;
+    var now = new Date();
+    var sp = sunPos(now);
+    setPalette(palAt(sp.alt), dur);
+
+    var st = stageOf(sp.alt, sp.solar < 12);
+    if (els.skyStage) {
+      els.skyStage.textContent = st[0];
+      els.skyStage.title = st[1];
+    }
+    var tm = sunTimes(now);
+    if (els.skySun) {
+      els.skySun.textContent = tm ? '日出 ' + hhmm(tm.rise) + ' · 日落 ' + hhmm(tm.set) : '极昼 / 极夜';
+    }
+    if (els.skyNow) {
+      var pct = (now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60) / 1440 * 100;
+      els.skyNow.style.left = 'calc(' + pct.toFixed(3) + '% - 1px)';
+    }
+    if (els.sky && !skyCache) els.sky.style.background = skyCache = skyGradient(now);
+
+    // 天光在画面上的落点：白天跟着太阳东升西落，入夜后淡出到偏上方
+    var lx = 50, ly = 38;
+    if (sp.alt > -6) {
+      lx = Math.max(16, Math.min(84, 50 + (sp.az - 180) / 90 * 22));
+      ly = Math.max(18, Math.min(70, 66 - (sp.alt + 6) * 0.6));
+    }
+    var root = document.documentElement.style;
+    root.setProperty('--lx', lx.toFixed(1) + '%');
+    root.setProperty('--ly', ly.toFixed(1) + '%');
+  }
+
+  function applyEarth(animate) {
+    var on = prefs.earth == 1;
+    if (els.earthSwitch) {
+      els.earthSwitch.classList.toggle('on', on);
+      els.earthSwitch.setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+    if (els.earthPanel) els.earthPanel.hidden = !on;
+
+    clearInterval(earthTimer);
+    earthTimer = null;
+
+    if (on) {
+      skyCache = null;
+      renderEarth(animate === false ? 0 : 2200);
+      earthTimer = setInterval(function () { renderEarth(1600); }, 60000);
+    } else if (animate === false) {
+      clearVars();
+    } else {
+      setPalette(PAL_DAY, 1200);
+      setTimeout(function () { if (prefs.earth != 1) clearVars(); }, 1280);
+    }
+  }
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ============ 偏好 ============ */
+  var KEY = 'flipclock.prefs.v1';
+  var prefs = {
+    hour12: 0,
+    scale: 100,
+    earth: 0,
+    loc: null   // 观察点 {name, lat, lon}；null = 按系统时区推断
+  };
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    for (var k in saved) { if (k in prefs) prefs[k] = saved[k]; }
+  } catch (e) { /* 忽略损坏的本地数据 */ }
+
+  function savePrefs() {
+    try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {}
+  }
+
+  /* ============ 观察点 ============
+     日出日落只跟经纬度有关，跟时区无关。默认落在深圳，
+     用户可以在面板里换成自己附近的城市——换一个城市，日出日落时刻、
+     太阳方位、光晕落点都会跟着变。 */
+  var CITIES = [
+    ['深圳', 22.54, 114.06, 'Asia/Shanghai'],
+    ['北京', 39.90, 116.41, 'Asia/Shanghai'],
+    ['上海', 31.23, 121.47, 'Asia/Shanghai'],
+    ['广州', 23.13, 113.26, 'Asia/Shanghai'],
+    ['伦敦', 51.51, -0.13, 'Europe/London'],
+    ['巴黎', 48.86, 2.35, 'Europe/Paris'],
+    ['纽约', 40.71, -74.01, 'America/New_York'],
+    ['洛杉矶', 34.05, -118.24, 'America/Los_Angeles'],
+    ['迪拜', 25.20, 55.27, 'Asia/Dubai']
+  ];
+  var DEFAULT_CITY = '深圳';
+  function findCity(name) {
+    for (var i = 0; i < CITIES.length; i++) if (CITIES[i][0] === name) return CITIES[i];
+    return null;
+  }
+  function siteFromPrefs() {
+    var s = prefs.loc;
+    if (s && typeof s.lat === 'number' && typeof s.lon === 'number') {
+      var known = findCity(s.name);
+      return { name: s.name || DEFAULT_CITY, lat: s.lat, lon: s.lon, tz: s.tz || (known && known[3]) || null };
+    }
+    var c = findCity(DEFAULT_CITY) || CITIES[0];
+    return { name: c[0], lat: c[1], lon: c[2], tz: c[3] };
+  }
+  // 该时区在某一时刻相对 UTC 的偏移（分钟）——按城市算，切换城市后
+  // 日出日落才是"那里的几点"，而不是"换算到本机的几点"
+  function tzOffset(tzName, d) {
+    if (!tzName) return null;
+    try {
+      var dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: tzName, hourCycle: 'h23',
+        year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+      });
+      var o = {};
+      dtf.formatToParts(d).forEach(function (p) { o[p.type] = p.value; });
+      var asUTC = Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour, +o.minute);
+      return Math.round((asUTC - Math.floor(d.getTime() / 60000) * 60000) / 60000);
+    } catch (e) { return null; }
+  }
+  function fmtGeo(lat, lon) {
+    return Math.abs(lat).toFixed(1) + '°' + (lat >= 0 ? 'N' : 'S') + ' · ' +
+           Math.abs(lon).toFixed(1) + '°' + (lon >= 0 ? 'E' : 'W');
+  }
+  function syncLocUI() {
+    if (els.locName) els.locName.textContent = SITE.name;
+    if (els.locGeo) els.locGeo.textContent = fmtGeo(SITE.lat, SITE.lon);
+    if (els.locList) {
+      $$('button', els.locList).forEach(function (b) {
+        b.classList.toggle('on', b.textContent === SITE.name);
+      });
+    }
+  }
+  function toggleLoc(force) {
+    if (!els.locList || !els.locBtn) return;
+    var on = typeof force === 'boolean' ? force : els.locList.hidden;
+    els.locList.hidden = !on;
+    els.locBtn.classList.toggle('open', on);
+    els.locBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (on) syncLocUI();
+  }
+  function setSite(lat, lon, name, tz) {
+    SITE = { name: name, lat: lat, lon: lon, tz: tz || null };
+    prefs.loc = { name: name, lat: lat, lon: lon, tz: SITE.tz };
+    savePrefs();
+    syncLocUI();
+    skyCache = null;
+    if (prefs.earth == 1) renderEarth(1200);
+  }
+
+  /* ============ 翻页卡片 ============ */
+  function easeInOut(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  var reduceCache = null;
+
+  function Card(el) {
+    this.el = el;
+    this.canvas = $('canvas', el);
+    this.ctx = this.canvas.getContext('2d');
+    this.w = 0; this.h = 0; this.dpr = 1;
+    this.fontSize = 100; this.slot = 60;
+    this.text = '00';
+    this.prev = '00';
+    this.anim = null;
+  }
+
+  Card.prototype.measure = function () {
+    var r = this.el.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    if (r.width < 1 || r.height < 1) return;
+    this.w = r.width;
+    this.h = r.height;
+    this.dpr = dpr;
+    this.canvas.width = Math.round(this.w * dpr);
+    this.canvas.height = Math.round(this.h * dpr);
+    this.fitFont();
+    this.draw(this.anim ? this.anim.last : 1);
+  };
+
+  Card.prototype.fitFont = function () {
+    var ctx = this.ctx;
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    // 固定槽宽：取十个数字里最宽的，保证翻页时数字不左右跳动
+    ctx.font = '600 100px ' + FONT;
+    var slot = 0;
+    for (var d = 0; d < 10; d++) {
+      slot = Math.max(slot, ctx.measureText(String(d)).width);
+    }
+    this.slot = slot; // 以 100px 字号为基准的比例
+    // 数字尽量占满卡面，翻页时叶片的折叠才看得清楚
+    var f = this.h * 0.68;
+    var twoW = (slot / 100) * f * 2;
+    var maxW = this.w * 0.86;
+    if (twoW > maxW) f *= maxW / twoW;
+    this.fontSize = f;
+  };
+
+  Card.prototype.face = function (ctx, w, h, text, fontSize) {
+    // 纸面卡身：上下两截的明暗差异来自中缝处的折角受光
+    var g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, P.card[0]);
+    g.addColorStop(0.46, P.card[1]);
+    g.addColorStop(0.5, P.card[2]);
+    g.addColorStop(1, P.card[3]);
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    // 顶部受压的细微暗角
+    var sh = ctx.createLinearGradient(0, 0, 0, h * 0.16);
+    sh.addColorStop(0, 'rgba(' + P.shRgb + ',0.06)');
+    sh.addColorStop(1, 'rgba(' + P.shRgb + ',0)');
+    ctx.fillStyle = sh;
+    ctx.fillRect(0, 0, w, h * 0.16);
+    // 底沿一道淡影，纸片才有厚度
+    var bt = ctx.createLinearGradient(0, h * 0.9, 0, h);
+    bt.addColorStop(0, 'rgba(' + P.shRgb + ',0)');
+    bt.addColorStop(1, 'rgba(' + P.shRgb + ',0.05)');
+    ctx.fillStyle = bt;
+    ctx.fillRect(0, h * 0.9, w, h * 0.1);
+
+    // 卡片接住的天光：一层取自背景光晕的环境色，自上而下淡出。
+    // 有了这层，卡片在蓝调/日落里就不是"贴上去的白板"，而是和天空同一个光源。
+    if (P.tint > 0.01) {
+      var ta = 0.11 * P.tint;
+      var amb = ctx.createLinearGradient(0, 0, 0, h * 0.78);
+      amb.addColorStop(0, 'rgba(' + P.bgRgb + ',' + ta.toFixed(3) + ')');
+      amb.addColorStop(0.55, 'rgba(' + P.bgRgb + ',' + (ta * 0.3).toFixed(3) + ')');
+      amb.addColorStop(1, 'rgba(' + P.bgRgb + ',0)');
+      ctx.fillStyle = amb;
+      ctx.fillRect(0, 0, w, h * 0.78);
+    }
+
+    ctx.font = '600 ' + fontSize + 'px ' + FONT;
+    ctx.textAlign = 'center';
+    // 以 "0" 字形的实际墨迹做光学垂直居中，数字在卡面上下留白完全一致
+    var mref = ctx.measureText('0');
+    var y;
+    if (mref.actualBoundingBoxAscent !== undefined) {
+      ctx.textBaseline = 'alphabetic';
+      y = h / 2 + (mref.actualBoundingBoxAscent - mref.actualBoundingBoxDescent) / 2;
+    } else {
+      ctx.textBaseline = 'middle';
+      y = h / 2;
+    }
+
+    ctx.fillStyle = P.ink;
+    var slotW = (this.slot / 100) * fontSize;
+    var chars = String(text).split('');
+    var total = slotW * chars.length;
+    var x = w / 2 - total / 2 + slotW / 2;
+    for (var i = 0; i < chars.length; i++) {
+      ctx.fillText(chars[i], x, y);
+      x += slotW;
+    }
+  };
+
+  Card.prototype.half = function (text, which, e) {
+    var ctx = this.ctx, w = this.w, h = this.h;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, which === 'bottom' ? h / 2 : 0, w, h / 2);
+    ctx.clip();
+    this.face(ctx, w, h, text, this.fontSize);
+    ctx.restore();
+  };
+
+  Card.prototype.leaf = function (text, which, sy) {
+    // 叶片以中缝为铰链做透视缩短：sy 为投影高度比例
+    var ctx = this.ctx, w = this.w, h = this.h;
+    var k = 1 - Math.max(0, Math.min(1, sy));
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, which === 'bottom' ? h / 2 : 0, w, h / 2);
+    ctx.clip();
+    ctx.translate(0, h / 2);
+    ctx.scale(1, Math.max(sy, 0.0001));
+    ctx.translate(0, -h / 2);
+    this.face(ctx, w, h, text, this.fontSize);
+    // 叶片倒下的过程中背光变暗，靠中缝一侧受光更多
+    var g = ctx.createLinearGradient(0, which === 'bottom' ? h / 2 : 0, 0, which === 'bottom' ? h : h / 2);
+    if (which === 'bottom') {
+      g.addColorStop(0, 'rgba(' + P.shRgb + ',' + (0.24 * k).toFixed(3) + ')');
+      g.addColorStop(0.5, 'rgba(' + P.shRgb + ',' + (0.08 * k).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + P.shRgb + ',' + (0.02 * k).toFixed(3) + ')');
+    } else {
+      g.addColorStop(0, 'rgba(' + P.shRgb + ',' + (0.02 * k).toFixed(3) + ')');
+      g.addColorStop(0.5, 'rgba(' + P.shRgb + ',' + (0.09 * k).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + P.shRgb + ',' + (0.2 * k).toFixed(3) + ')');
+    }
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    ctx.restore();
+  };
+
+  Card.prototype.seam = function () {
+    var ctx = this.ctx, w = this.w, h = this.h;
+    ctx.fillStyle = 'rgba(' + P.shRgb + ',0.16)';
+    ctx.fillRect(0, h / 2 - 0.9, w, 0.9);
+    ctx.fillStyle = 'rgba(255,255,255,' + P.seamHi + ')';
+    ctx.fillRect(0, h / 2, w, 0.9);
+  };
+
+  // 叶片自由边落在静止面上留下的柔影，让下落有体积感
+  Card.prototype.castShadow = function (which, sy) {
+    var ctx = this.ctx, w = this.w, h = this.h;
+    var A = (h / 2) * Math.max(0, Math.min(1, sy));
+    var band = Math.min(A, h * 0.13);
+    if (band < 1) return;
+
+    var y0 = which === 'top' ? h / 2 - A : h / 2 + A;
+    var y1 = which === 'top' ? y0 - band : y0 + band;
+    var g = ctx.createLinearGradient(0, y0, 0, y1);
+    g.addColorStop(0, 'rgba(' + P.shRgb + ',' + (0.09 * (1 - sy)).toFixed(3) + ')');
+    g.addColorStop(1, 'rgba(' + P.shRgb + ',0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, Math.min(y0, y1), w, band);
+  };
+
+  Card.prototype.draw = function (e) {
+    var ctx = this.ctx, w = this.w, h = this.h;
+    if (!w || !h) return;
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+
+    if (e >= 1) {
+      // 静止时整卡一次成型，避免上下两半拼接的细缝
+      this.face(ctx, w, h, this.text, this.fontSize);
+      this.seam();
+      return;
+    }
+
+    var cur = this.text, old = this.prev;
+
+    // 静止层：上半早已是新叶面（旧叶片翻走后露出的下一张）
+    // 下半仍是旧叶面，等新叶片翻落下来把它盖住
+    this.half(cur, 'top');
+    this.half(old, 'bottom');
+
+    if (e < 0.5) {
+      // 前半程：旧叶片以中缝为铰链向下倒，投影从中缝往上收，逐渐露出新上半
+      var s1 = Math.cos(e * Math.PI);
+      this.leaf(old, 'top', s1);
+      this.castShadow('top', s1);
+    } else {
+      // 后半程：新叶片从中缝向下展开，盖住旧下半
+      var s2 = Math.abs(Math.cos(e * Math.PI));
+      this.leaf(cur, 'bottom', s2);
+      this.castShadow('bottom', s2);
+    }
+
+    this.seam();
+  };
+
+  Card.prototype.set = function (text) {
+    text = String(text);
+    if (text === this.text) return;
+    this.prev = this.text;
+    this.text = text;
+    if (reduceMotion) {
+      this.prev = text;
+      this.draw(1);
+      return;
+    }
+    this.anim = { t0: performance.now(), last: 0 };
+    wake();
+  };
+
+  var cards = [];
+  var running = false;
+
+  function wake() {
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+
+  function loop(now) {
+    var active = false;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (!c.anim) continue;
+      var p = Math.min(1, (now - c.anim.t0) / DUR);
+      var e = easeInOut(p);
+      c.anim.last = e;
+      c.draw(e);
+      if (p >= 1) {
+        c.anim = null;
+        c.prev = c.text;
+        c.draw(1);
+      } else {
+        active = true;
+      }
+    }
+    if (active) requestAnimationFrame(loop); else running = false;
+  }
+
+  /* ============ 布局 ============ */
+  function layout() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var compact = vw < 700;
+    var n = 3;
+    var gap = compact ? 8 : Math.max(14, Math.round(vw * 0.011));
+    var sidePad = compact ? 28 : Math.max(96, vw * 0.09);
+    var byW = (vw - sidePad * 2 - gap * (n - 1)) / n;
+    var byH = (vh - (compact ? 176 : 240)) / 1.12;
+    var w = Math.min(byW, byH, 218);
+    w = Math.max(w, 58);
+    w = Math.min(Math.round(w * (prefs.scale / 100)), Math.floor(byW));
+
+    var root = document.documentElement.style;
+    root.setProperty('--card-w', w + 'px');
+    root.setProperty('--card-h', Math.round(w * 1.12) + 'px');
+    root.setProperty('--gap', gap + 'px');
+
+    for (var i = 0; i < cards.length; i++) cards[i].measure();
+  }
+
+  /* ============ 时间取值 ============ */
+  function pad2(n) {
+    n = Math.max(0, Math.min(99, Math.floor(n)));
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  /* ============ 视图刷新 ============ */
+  var els = {};
+  var lastMer = null;
+
+  function units() {
+    var d = new Date();
+    var h = d.getHours(), m = d.getMinutes(), s = d.getSeconds(), mer = '';
+    if (prefs.hour12 == 1) {
+      mer = h < 12 ? 'AM' : 'PM';
+      h = h % 12;
+      if (h === 0) h = 12;
+    }
+    return { h: pad2(h), m: pad2(m), s: pad2(s), mer: mer };
+  }
+
+  function paintUnits() {
+    var u = units();
+    if (cards[0]) cards[0].set(u.h);
+    if (cards[1]) cards[1].set(u.m);
+    if (cards[2]) cards[2].set(u.s);
+
+    if (u.mer !== lastMer) {
+      lastMer = u.mer;
+      var merEl = $('[data-mer]');
+      if (merEl) merEl.textContent = u.mer;
+    }
+  }
+
+  /* ============ 主循环（每 100ms 对齐一次） ============ */
+  function tick() {
+    paintUnits();
+  }
+
+  /* ============ 设置联动 ============ */
+  function applyPrefs() {
+    $$('[data-seg]').forEach(function (seg) {
+      var key = seg.getAttribute('data-seg');
+      $$('button', seg).forEach(function (b) {
+        var on = String(prefs[key]) === b.getAttribute('data-val');
+        b.classList.toggle('on', on);
+      });
+    });
+
+    els.scale.value = prefs.scale;
+    els.scaleNum.value = prefs.scale;
+
+    layout();
+    paintUnits();
+  }
+
+  /* ============ 全屏 ============ */
+  function isFull() {
+    return document.fullscreenElement || document.webkitFullscreenElement;
+  }
+  function syncFull() {
+    document.body.classList.toggle('is-full', !!isFull());
+  }
+  function toggleFull() {
+    var el = document.documentElement;
+    if (!isFull()) {
+      var req = el.requestFullscreen || el.webkitRequestFullscreen;
+      if (req) { try { req.call(el); } catch (e) {} }
+    } else {
+      var exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (exit) { try { exit.call(document); } catch (e) {} }
+    }
+  }
+
+  /* ============ 抽屉 ============ */
+  function openSheet() {
+    els.sheet.classList.add('open');
+    els.sheet.setAttribute('aria-hidden', 'false');
+    els.scrim.classList.add('on');
+    document.body.classList.add('sheet-open');
+  }
+  function closeSheet() {
+    els.sheet.classList.remove('open');
+    els.sheet.setAttribute('aria-hidden', 'true');
+    els.scrim.classList.remove('on');
+    document.body.classList.remove('sheet-open');
+    toggleLoc(false);
+  }
+  function toggleSheet() {
+    els.sheet.classList.contains('open') ? closeSheet() : openSheet();
+  }
+
+  /* ============ 空闲隐藏 ============ */
+  var idleTimer = null;
+  function bump() {
+    document.body.classList.remove('idle');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () {
+      if (isFull()) document.body.classList.add('idle');
+    }, 3000);
+  }
+
+  /* ============ 启动 ============ */
+  function init() {
+    els = {
+      scale: $('#scale'), scaleNum: $('#scaleNum'),
+      sheet: $('#sheet'), scrim: $('#scrim'),
+      earthSwitch: $('#earthSwitch'), earthPanel: $('#earthPanel'),
+      sky: $('#sky'), skyNow: $('#skyNow'), skyStage: $('#skyStage'), skySun: $('#skySun'),
+      locBtn: $('#locBtn'), locList: $('#locList'),
+      locName: $('#locName'), locGeo: $('#locGeo')
+    };
+
+    // 观察点：默认深圳，用户可以改成自己附近的城市
+    SITE = siteFromPrefs();
+    if (els.locList) {
+      var frag = document.createDocumentFragment();
+      CITIES.forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = c[0];
+        b.addEventListener('click', function () {
+          setSite(c[1], c[2], c[0], c[3]);
+          toggleLoc(false);
+        });
+        frag.appendChild(b);
+      });
+      els.locList.appendChild(frag);
+    }
+    if (els.locBtn) {
+      els.locBtn.addEventListener('click', function () { toggleLoc(); });
+    }
+    syncLocUI();
+
+    cards = $$('.card').map(function (el) { return new Card(el); });
+
+    // 分段选项
+    $$('[data-seg]').forEach(function (seg) {
+      var key = seg.getAttribute('data-seg');
+      $$('button', seg).forEach(function (b) {
+        b.addEventListener('click', function () {
+          prefs[key] = parseInt(b.getAttribute('data-val'), 10);
+          savePrefs();
+          applyPrefs();
+        });
+      });
+    });
+
+    // 缩放：滑杆与数值框双向联动
+    var SCALE_MIN = 60, SCALE_MAX = 150;
+    function setScale(v, writeBack) {
+      v = Math.round(v);
+      if (!isFinite(v)) v = 100;
+      v = Math.max(SCALE_MIN, Math.min(SCALE_MAX, v));
+      prefs.scale = v;
+      els.scale.value = v;
+      if (writeBack) els.scaleNum.value = v;
+      savePrefs();
+      layout();
+    }
+    els.scale.addEventListener('input', function () {
+      setScale(parseInt(els.scale.value, 10), true);
+    });
+    // 边输边生效，但不在输入过程中改写输入框，避免光标跳动
+    els.scaleNum.addEventListener('input', function () {
+      var v = parseInt(els.scaleNum.value, 10);
+      if (isFinite(v) && v >= SCALE_MIN && v <= SCALE_MAX) setScale(v, false);
+    });
+    // 失焦 / 回车时统一收敛到合法范围并回写
+    els.scaleNum.addEventListener('change', function () {
+      var v = parseInt(els.scaleNum.value, 10);
+      setScale(isFinite(v) ? v : prefs.scale, true);
+    });
+
+    // Earth Light：跟着太阳走
+    els.earthSwitch.addEventListener('click', function () {
+      prefs.earth = prefs.earth == 1 ? 0 : 1;
+      savePrefs();
+      applyEarth(true);
+    });
+
+    // 图标按钮
+    $('#full').addEventListener('click', toggleFull);
+    $('#openSheet').addEventListener('click', toggleSheet);
+    $('#closeSheet').addEventListener('click', closeSheet);
+    els.scrim.addEventListener('click', closeSheet);
+
+    document.addEventListener('fullscreenchange', syncFull);
+    document.addEventListener('webkitfullscreenchange', syncFull);
+
+    // 双击舞台全屏
+    $('#stage').addEventListener('dblclick', toggleFull);
+
+    // 键盘
+    document.addEventListener('keydown', function (e) {
+      var tag = (e.target && e.target.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA') {
+        // 输入框内：回车确认并失焦，ESC 收起面板
+        if (e.key === 'Enter') e.target.blur();
+        else if (e.key === 'Escape') { e.target.blur(); closeSheet(); }
+        return;
+      }
+
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFull();
+      } else if (e.key === 's' || e.key === 'S') {
+        els.sheet.classList.contains('open') ? closeSheet() : openSheet();
+      } else if (e.key === 'Escape') {
+        closeSheet();
+      }
+    });
+
+    // 空闲
+    ['mousemove', 'touchstart', 'keydown'].forEach(function (ev) {
+      window.addEventListener(ev, bump, { passive: true });
+    });
+
+    // 尺寸变化
+    var rt = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(rt);
+      rt = setTimeout(layout, 120);
+    });
+    window.addEventListener('orientationchange', function () { setTimeout(layout, 260); });
+
+    // 从后台回来立即校准
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) {
+        paintUnits();
+        if (prefs.earth == 1) { skyCache = null; renderEarth(1200); }
+      }
+    });
+
+    // 初始状态
+    syncFull();
+    applyPrefs();
+    applyEarth(false);
+    requestAnimationFrame(function () { layout(); layout(); });
+
+    // 文案先跟上系统时间，之后每 100ms 对齐一次
+    paintUnits();
+    setInterval(tick, 100);
+
+    // 拆掉首屏的闪烁：字体就绪后重测一次
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { layout(); });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
